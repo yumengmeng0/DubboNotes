@@ -267,3 +267,19 @@ pom.xml添加
     <version>3.3.2</version>
 </plugin>
 ```
+
+# 指向“http://localhost:8002/js/jquery-3.3.1.min.js”的  加载失败
+
+spring-mvc.xml配置文件添加
+```xml
+  <mvc:resources mapping="/js/**" location="/js/"/>
+```
+
+# 提示： Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+在项目pom.xml中增加如下配置：
+```xml
+<properties>
+    <!--编译编码-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+```
