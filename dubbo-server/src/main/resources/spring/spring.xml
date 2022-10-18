@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--    1.服务提供方在zookeeper中的别名-->
+    <dubbo:application name="dubbo-server"></dubbo:application>
+    <!--    2.注册中心地址-->
+    <dubbo:registry address="zookeeper://47.98.138.215:2181"></dubbo:registry>
+    <!--    3.扫描类（服务提供类所在包）-->
+    <dubbo:annotation package="service.impl"></dubbo:annotation>
+
+    <!--    让监控去注册中心自动找服务-->
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
+
+    <!--   timeout：超时时间，默认1s,
+           retries：重试次数，不包括第一次
+    -->
+    <dubbo:provider timeout="2000" retries="3" port="20881"></dubbo:provider>
+
+    <!--    多版本-->
+<!--    <dubbo:service interface="service.HelloService" class="service.impl.HelloServiceImpl01"-->
+<!--                   version="1.0.0"></dubbo:service>-->
+    <dubbo:service interface="service.HelloService" class="service.impl.HelloServiceImpl02"
+                   version="2.0.0"></dubbo:service>
+</beans>
